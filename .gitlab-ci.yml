@@ -1,0 +1,23 @@
+image: php:7.2
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - apt-get update -yqq
+  - docker-php-ext-install pdo_mysql
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install
+
+services:
+  - mysql:5.7
+
+variables:
+  MYSQL_DATABASE: blog_io
+  MYSQL_ROOT_PASSWORD: mysql
+
+test:php7.2:mysql:
+  image: php:7.2
+  script:
+    - ./vendor/bin/phpunit --bootstrap vendor/autoload.php ./src/test/Queries

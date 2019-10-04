@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z]+)$ index.php?page=$1 [QSA,L]
+RewriteRule ^([a-z]+)([0-9]+)$ index.php?page=notFound [QSA,L]
+RewriteRule ^([0-9]+)([a-z]+)$ index.php?page=notFound [QSA,L]
+RewriteRule ^([0-9]+)$ index.php?page=notFound [QSA,L]
+RewriteRule ^([a-z]+)/([0-9]+)$ index.php?page=$1&id=$2 [QSA,L]
+RewriteRule ^([a-z]+)/([a-z]+)$ index.php?page=$1&param=$2 [QSA,L]
+RewriteRule ^notFound$ index.php?page=notFound [L]
